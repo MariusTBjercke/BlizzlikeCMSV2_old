@@ -1,0 +1,5 @@
+node_modules
+vendor
+.idea
+# Project exclude paths
+/html/assets/js/
