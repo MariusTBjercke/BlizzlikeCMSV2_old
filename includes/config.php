@@ -42,7 +42,7 @@ $GLOBALS['data'] = [
                 "name" => "Other",
                 "icon" => "default",
                 "url" => "other",
-                "template" => "other",
+                "template" => "index",
             ],
         ],
         "users" => $users,

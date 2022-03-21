@@ -32,4 +32,9 @@ class BLSqlConnection extends mysqli
         $query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'";
         return $this->query($query);
     }
+
+    public function registerUser(string $username, string $password, string $email) {
+        $query = "INSERT INTO users (username, password, email) VALUES ('{$username}', '{$password}', '{$email}')";
+        return $this->query($query);
+    }
 }

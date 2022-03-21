@@ -11159,6 +11159,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
 .login-form__input {
   margin-bottom: 10px;
 }
@@ -11176,6 +11180,31 @@ textarea.form-control-lg {
   border: none;
 }
 .login-form__input .submit:hover {
+  transform: scale(1.05);
+  transition: 0.25s;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+.register-form__input {
+  margin-bottom: 10px;
+}
+.register-form__input div {
+  display: inline-block;
+}
+.register-form__input div:first-child {
+  padding-right: 10px;
+  min-width: 90px;
+}
+.register-form__input .submit {
+  padding: 0.5rem 1rem;
+  background: #0a53be;
+  color: #ffffff;
+  border: none;
+}
+.register-form__input .submit:hover {
   transform: scale(1.05);
   transition: 0.25s;
 }

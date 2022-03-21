@@ -4,6 +4,7 @@ import 'bootstrap';
 // Other assets
 import './base';
 import './login';
+import './register';
 
 // Images
 // @ts-ignore

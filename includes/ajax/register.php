@@ -5,20 +5,19 @@ require_once('../../vendor/autoload.php');
 
 $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
 $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
 // Validate all fields before continuing
-if (!$username || !$password) {
+if (!$username || !$password || !$email) {
     echo "0";
     return;
 }
 
 $db = new BLSqlConnection();
 
-$result = $db->validateUser($username, $password);
+$result = $db->registerUser($username, $password, $email);
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $_SESSION['current_user'] = $row['username'];
+if ($result) {
     echo "1";
 } else {
     echo "0";
