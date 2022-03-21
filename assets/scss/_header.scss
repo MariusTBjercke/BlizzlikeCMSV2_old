@@ -1,3 +1,44 @@
-.header {
-  color: red;
+nav {
+  background: #503a16;
+  padding: .6rem 0;
+  color: #fff;
+  box-shadow: 0 2px 2px #000000;
+
+  .row {
+    align-items: center;
+  }
+
+  .top-logo {
+    background: url('../img/logo-wow.png') no-repeat;
+    height: 80px;
+    background-size: contain;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &__item {
+      padding: 1.6rem 2rem;
+      border-left: 1px solid rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      color: #fff;
+
+      &:last-child {
+        border-right: 1px solid rgba(255, 255, 255, 0.4);
+      }
+
+      &:hover {
+        transform: scale(1.06);
+        transition: .5s;
+        cursor: pointer;
+        color: #fff;
+      }
+    }
+  }
 }

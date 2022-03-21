@@ -1,13 +1,10 @@
-// Assets
+// Node modules
 import 'bootstrap';
 
-const button = $("#myButton");
-const output = $("#output");
+// Other assets
+import './base';
 
-function add(num1: number, num2: number): string {
-    return String(num1 + num2);
-}
-
-button.on("click", () => {
-    output.text(add(5, 6));
-});
+// Images
+// @ts-ignore
+import Favicon from '../img/favicon.png';
+new Image(Favicon);

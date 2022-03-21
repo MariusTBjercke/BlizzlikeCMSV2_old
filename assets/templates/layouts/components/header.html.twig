@@ -1,0 +1,14 @@
+<nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="top-logo"></div>
+            </div>
+            <div class="col-9 navigation">
+                {% for item in site.pages %}
+                    <a href="index.php?page={{ item.url }}" class="navigation__item">{{ item.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</nav>

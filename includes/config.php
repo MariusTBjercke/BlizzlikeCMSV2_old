@@ -1,7 +1,44 @@
 <?php
-declare(strict_types=1);
 
-function test(): int
-{
-    return 2;
-}
+// Twig settings
+$GLOBALS['templateDir'] = __DIR__ . '/../assets/templates';
+
+// MySQLi settings
+$GLOBALS['sql_hostname'] = '127.0.0.1'; // USE IP AND NOT ALIAS LIKE 'localhost' HERE!
+$GLOBALS['sql_username'] = 'root';
+$GLOBALS['sql_password'] = '';
+$GLOBALS['sql_database'] = 'blizzlikecms';
+
+/**
+ * Initialize page data.
+ */
+
+$db = new BLSqlConnection();
+$users = $db->getUsers();
+
+$GLOBALS['data'] = [
+    "site" => [
+        "currentUser" => null,
+        "pages" => [
+            [
+                "name" => "Home",
+                "icon" => "default",
+                "url" => "home",
+                "template" => "index",
+            ],
+            [
+                "name" => "Register",
+                "icon" => "default",
+                "url" => "register",
+                "template" => "register",
+            ],
+            [
+                "name" => "Login",
+                "icon" => "default",
+                "url" => "login",
+                "template" => "login",
+            ],
+        ],
+        "users" => $users,
+    ],
+];

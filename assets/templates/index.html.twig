@@ -1,0 +1,12 @@
+{% extends "@grid/page.html.twig" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block maincontent %}
+    <h2>Home</h2>
+    {% for user in site.users %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+{% endblock %}

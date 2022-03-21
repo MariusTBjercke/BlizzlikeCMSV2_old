@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+</head>
+<body>
+
+{% include '@components/header.html.twig' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% block maincontent %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% include '@components/footer.html.twig' %}
+
+<script src="assets/js/bundle.min.js"></script>
+</body>
+</html>
