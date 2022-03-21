@@ -5,5 +5,24 @@
 {% endblock %}
 
 {% block maincontent %}
-    <h2>Login</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Login</h2>
+                <div class="login-form">
+                    <div class="login-form__input">
+                        <div>Username:</div>
+                        <div><input type="text" id="username"></div>
+                    </div>
+                    <div class="login-form__input">
+                        <div>Password:</div>
+                        <div><input type="password" id="password"></div>
+                    </div>
+                    <div class="login-form__input">
+                        <input type="submit" id="submit" class="submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

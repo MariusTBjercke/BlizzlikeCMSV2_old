@@ -3,6 +3,7 @@ import 'bootstrap';
 
 // Other assets
 import './base';
+import './login';
 
 // Images
 // @ts-ignore

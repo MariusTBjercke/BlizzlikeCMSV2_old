@@ -27,4 +27,9 @@ class BLSqlConnection extends mysqli
         $query = 'SELECT * FROM users ORDER BY id DESC';
         return $this->query($query)->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function validateUser(string $username, string $password) {
+        $query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'";
+        return $this->query($query);
+    }
 }

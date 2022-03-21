@@ -1,14 +1,14 @@
 <?php
+session_start();
 
 require_once('../vendor/autoload.php');
 
 $page = $_GET['page'] ?? 'home';
-$template = 'index';
 
-// Get corresponding template from data array
-foreach ($GLOBALS['data']['site']['pages'] as $item) {
-    $template = $item['url'] == $page ? $item['template'] : $template;
-}
+// Find corresponding view/page template
+$key = array_search($page, array_column($GLOBALS['data']['site']['pages'], 'url'));
+
+$template = $GLOBALS['data']['site']['pages'][$key]['template'];
 
 $view = new BLViewRenderer();
 $view->render($template);

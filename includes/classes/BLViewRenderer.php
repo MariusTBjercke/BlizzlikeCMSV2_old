@@ -13,9 +13,9 @@ use Twig\TwigFunction;
  * Class for rendering views/pages.
  **/
 class BLViewRenderer {
-    public FilesystemLoader $loader;
-    public Environment $twig;
-    public Lexer $lexer;
+    private FilesystemLoader $loader;
+    private Environment $twig;
+    private Lexer $lexer;
 
     /**
      * Page constructor.

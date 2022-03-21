@@ -1,0 +1,27 @@
+.login-form {
+
+  &__input {
+    margin-bottom: 10px;
+
+    div {
+      display: inline-block;
+
+      &:first-child {
+        padding-right: 10px;
+        min-width: 90px;
+      }
+    }
+
+    .submit {
+      padding: .5rem 1rem;
+      background: #0a53be;
+      color: #ffffff;
+      border: none;
+
+      &:hover {
+        transform: scale(1.05);
+        transition: .25s;
+      }
+    }
+  }
+}

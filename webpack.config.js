@@ -12,11 +12,9 @@ let compressFiles = false;
 // Clean/remove all files on build?
 let cleanFiles = false;
 
-const webpackConfig = {
+const jsConfig = {
     entry: {
-        bundle: '/assets/js/index.ts',
-        style: '/assets/scss/style.scss',
-        wysiwyg: '/assets/scss/wysiwyg.scss'
+        bundle: '/assets/js/index.ts'
     },
     output: {
         filename: 'assets/js/[name].min.js',
@@ -37,6 +35,41 @@ const webpackConfig = {
                     filename: 'assets/img/[name][ext]'
                 }
             },
+        ]
+    },
+    optimization: {
+        minimize: isProduction ? true : compressFiles,
+        minimizer: [
+            new TerserPlugin(),
+        ],
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
+        })
+    ]
+};
+
+const cssConfig = {
+    entry: {
+        style: '/assets/scss/style.scss',
+        wysiwyg: '/assets/scss/wysiwyg.scss'
+    },
+    output: {
+        filename: 'assets/js/[name].min.js',
+        path: path.resolve(__dirname, 'html'),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.svg|png|jpg|jpeg|gif$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/img/[name][ext]'
+                }
+            },
             {
                 test: /\.s[ac]ss$/i,
                 use: [
@@ -50,16 +83,10 @@ const webpackConfig = {
     optimization: {
         minimize: isProduction ? true : compressFiles,
         minimizer: [
-            new TerserPlugin(),
             new CssMinimizerPlugin(),
         ],
     },
     plugins: [
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery'
-        }),
         new MiniCssExtractPlugin({
             filename: "assets/css/[name].min.css",
         }),
@@ -69,4 +96,4 @@ const webpackConfig = {
     ]
 };
 
-module.exports = [webpackConfig];
+module.exports = [jsConfig, cssConfig];

@@ -18,7 +18,7 @@ $users = $db->getUsers();
 
 $GLOBALS['data'] = [
     "site" => [
-        "currentUser" => null,
+        "current_user" => $_SESSION['current_user'] ?? null,
         "pages" => [
             [
                 "name" => "Home",
@@ -37,6 +37,12 @@ $GLOBALS['data'] = [
                 "icon" => "default",
                 "url" => "login",
                 "template" => "login",
+            ],
+            [
+                "name" => "Other",
+                "icon" => "default",
+                "url" => "other",
+                "template" => "other",
             ],
         ],
         "users" => $users,
