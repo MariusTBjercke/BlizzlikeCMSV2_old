@@ -1,6 +1,7 @@
 nav {
-  background: #503a16;
-  padding: .6rem 0;
+  background: url('../img/navbar-bg.png') no-repeat;
+  background-size: cover;
+  padding: 0 0;
   color: #fff;
   box-shadow: 0 2px 2px #000000;
   margin-bottom: .5rem;
@@ -11,7 +12,7 @@ nav {
 
   .top-logo {
     background: url('../img/logo-wow.png') no-repeat;
-    height: 80px;
+    height: 60px;
     background-size: contain;
 
     &:hover {
@@ -26,19 +27,46 @@ nav {
 
     &__item {
       padding: 1.6rem 2rem;
-      border-left: 1px solid rgba(255, 255, 255, 0.4);
+      border-left: 1px solid #000000;
       text-decoration: none;
       color: #fff;
 
       &:last-child {
-        border-right: 1px solid rgba(255, 255, 255, 0.4);
+        border-right: 1px solid #000000;
       }
 
       &:hover {
         transition: .25s;
         cursor: pointer;
-        color: #1f1f1f;
+        color: #ffffff;
+        background-color: #764d0d;
       }
+
+      &_active {
+        background-color: #764d0d;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  .mobile-navigation {
+    display: none;
+
+    i {
+      font-size: 3.1rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 767px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

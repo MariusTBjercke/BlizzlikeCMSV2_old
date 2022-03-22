@@ -1,13 +1,20 @@
 <nav>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-lg-3">
+            <div class="col-10 col-md-4 col-lg-3">
                 <div class="top-logo"></div>
             </div>
-            <div class="col-md-8 col-lg-9 navigation">
-                {% for item in site.pages %}
-                    <a href="index.php?page={{ item.url }}" class="navigation__item">{{ item.name }}</a>
-                {% endfor %}
+            <div class="col-2 col-md-8 col-lg-9">
+                <div class="navigation">
+                    {% for item in site.pages %}
+                        {% if item.navigation %}
+                            <a href="index.php?page={{ item.url }}" class="navigation__item {% if item.url == site.current_page %}navigation__item_active{% endif %}">{{ item.name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="mobile-navigation">
+                    <i class="bi bi-list"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -17,9 +24,9 @@
     <div class="row">
         <div class="col">
             {% if site.current_user is not null %}
-                <p>You are logged in as: {{ site.current_user }}</p>
+                <p>You are signed in as: {{ site.current_user }}<br><a href="index.php?action=logout">Sign out?</a></p>
             {% else %}
-                <p>You are not logged in.</p>
+                <p>You are not signed in.</p>
             {% endif %}
         </div>
     </div>

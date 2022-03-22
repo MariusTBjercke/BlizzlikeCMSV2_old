@@ -71,10 +71,29 @@ const cssConfig = {
                 }
             },
             {
+                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[name][ext]'
+                }
+            },
+            {
                 test: /\.s[ac]ss$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
                     "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    function () {
+                                        return [ require('autoprefixer') ];
+                                    }
+                                ],
+                            },
+                        },
+                    },
                     "sass-loader"
                 ],
             },

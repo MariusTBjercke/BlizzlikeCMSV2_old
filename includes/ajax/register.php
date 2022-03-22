@@ -9,7 +9,7 @@ $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
 // Validate all fields before continuing
 if (!$username || !$password || !$email) {
-    echo "0";
+    echo "2";
     return;
 }
 

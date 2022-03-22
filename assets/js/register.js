@@ -19,6 +19,8 @@ if (registerForm) {
             if (response === "1") {
                 alert("The account has been registered.");
                 window.location = "index.php";
+            } else if (response === "2") {
+                alert("All fields need to be filled out, please try again.");
             } else {
                 alert("Something went wrong, please try again.");
                 usernameField.value = "";

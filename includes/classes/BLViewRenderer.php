@@ -4,7 +4,6 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
-use Twig\Lexer;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
@@ -15,33 +14,27 @@ use Twig\TwigFunction;
 class BLViewRenderer {
     private FilesystemLoader $loader;
     private Environment $twig;
-    private Lexer $lexer;
+    private static array $instances = [];
 
     /**
      * Page constructor.
      *
      * @throws LoaderError
      */
-    public function __construct() {
-        $this->loader = new FilesystemLoader($GLOBALS['templateDir']);
+    private function __construct() {
+        $this->loader = new FilesystemLoader($GLOBALS['twig_template_dir']);
         $this->twig = new Environment($this->loader);
-        $this->addGlobalFunction('bem', [Bem::class, 'bemx']);
-        $this->lexer = new Lexer($this->twig, [
-            // Lexer options
-        ]);
-        $this->twig->setLexer($this->lexer);
-        $this->addPaths();
     }
 
     /**
      * Add Twig template paths.
      *
+     * @param string
      * @return void
      * @throws LoaderError
      */
-    private function addPaths() {
-        $this->loader->addPath('../assets/templates/layouts/components', 'components');
-        $this->loader->addPath('../assets/templates/layouts/grid', 'grid');
+    public function addPath($path, $namespace) {
+        $this->loader->addPath($path, $namespace);
     }
 
     /**
@@ -67,5 +60,26 @@ class BLViewRenderer {
      */
     public function addGlobalFunction(string $name, callable $function) {
         $this->twig->addFunction(new TwigFunction($name, $function));
+    }
+
+    protected function __clone() {
+    }
+
+    /**
+     * Prevent restoring.
+     *
+     * @throws Exception
+     */
+    public function __wakeup() {
+        throw new Exception("Cannot unserialize a singleton.");
+    }
+
+    public static function getInstance(): BLViewRenderer {
+        $cls = static::class;
+        if (!isset(self::$instances[$cls])) {
+            self::$instances[$cls] = new static();
+        }
+
+        return self::$instances[$cls];
     }
 }
