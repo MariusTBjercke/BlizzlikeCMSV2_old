@@ -11,17 +11,16 @@ use Twig\TwigFunction;
  * BlizzlikeCMS View Renderer
  * Class for rendering views/pages.
  **/
-class BLViewRenderer {
+class BLViewRenderer extends Singleton {
     private FilesystemLoader $loader;
     private Environment $twig;
-    private static array $instances = [];
 
     /**
      * Page constructor.
      *
-     * @throws LoaderError
      */
-    private function __construct() {
+    protected function __construct() {
+        parent::__construct();
         $this->loader = new FilesystemLoader($GLOBALS['twig_template_dir']);
         $this->twig = new Environment($this->loader);
     }
@@ -29,12 +28,16 @@ class BLViewRenderer {
     /**
      * Add Twig template paths.
      *
-     * @param string
+     * @param $path
+     * @param $namespace
      * @return void
-     * @throws LoaderError
      */
     public function addPath($path, $namespace) {
-        $this->loader->addPath($path, $namespace);
+        try {
+            $this->loader->addPath($path, $namespace);
+        } catch (LoaderError $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     /**
@@ -60,26 +63,5 @@ class BLViewRenderer {
      */
     public function addGlobalFunction(string $name, callable $function) {
         $this->twig->addFunction(new TwigFunction($name, $function));
-    }
-
-    protected function __clone() {
-    }
-
-    /**
-     * Prevent restoring.
-     *
-     * @throws Exception
-     */
-    public function __wakeup() {
-        throw new Exception("Cannot unserialize a singleton.");
-    }
-
-    public static function getInstance(): BLViewRenderer {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
-
-        return self::$instances[$cls];
     }
 }

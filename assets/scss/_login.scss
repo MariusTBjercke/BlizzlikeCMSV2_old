@@ -12,11 +12,16 @@
         padding-right: 10px;
         min-width: 90px;
       }
+
+      .input-error {
+        border-color: red;
+        border-width: 3px;
+      }
     }
 
     .submit {
       padding: .5rem 1rem;
-      background: #764d0d;
+      background: #0063a1;
       color: #ffffff;
       border: none;
 

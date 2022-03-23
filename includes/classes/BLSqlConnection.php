@@ -5,17 +5,23 @@
  */
 class BLSqlConnection extends mysqli
 {
+    private static array $instances = [];
 
     /**
      * Parent constructor with values from configuration file.
+     * @throws Exception
      */
-    public function __construct() {
+    protected function __construct() {
         parent::__construct(
             $GLOBALS['sql_hostname'],
             $GLOBALS['sql_username'],
             $GLOBALS['sql_password'],
             $GLOBALS['sql_database']
         );
+
+        if ($this->connect_error) {
+            throw new Exception($this->connect_error);
+        }
     }
 
     /**
@@ -25,7 +31,8 @@ class BLSqlConnection extends mysqli
      */
     public function getUsers(): array {
         $query = 'SELECT * FROM users ORDER BY id DESC';
-        return $this->query($query)->fetch_all(MYSQLI_ASSOC);
+        $result = $this->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function validateUser(string $username, string $password) {
@@ -37,4 +44,26 @@ class BLSqlConnection extends mysqli
         $query = "INSERT INTO users (username, password, email) VALUES ('{$username}', '{$password}', '{$email}')";
         return $this->query($query);
     }
+    public static function getInstance() {
+        $class = static::class;
+
+        if (!isset(self::$instances[$class])) {
+            self::$instances[$class] = new static();
+        }
+
+        return self::$instances[$class];
+    }
+
+    /**
+     * Should not be cloneable.
+     *
+     */
+    private function __clone() {}
+
+    /**
+     * Should not be restorable.
+     *
+     */
+    private function __wakeup() {}
+
 }

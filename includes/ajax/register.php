@@ -13,7 +13,7 @@ if (!$username || !$password || !$email) {
     return;
 }
 
-$db = new BLSqlConnection();
+$db = BLSqlConnection::getInstance();
 
 $result = $db->registerUser($username, $password, $email);
 

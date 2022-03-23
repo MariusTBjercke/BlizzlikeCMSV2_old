@@ -5,8 +5,37 @@ if (loginForm) {
     const passwordField = document.querySelector(".login-form #password");
     const loginBtn = document.querySelector(".login-form #submit");
 
+    // Add listener for "enter" key.
+    loginForm.addEventListener("keydown", (e) => {
+        if (e.keyCode === 13) {
+            loginBtn.click();
+        }
+    });
+
+    let fieldsError = "All fields needs to be filled out, please try again.";
+
     loginBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+        let error = 0;
+
+        // Form validation
+        for (let item of [
+            [usernameField, "Please fill inn a username."],
+            [passwordField, "Please fill inn a password."]
+        ]) {
+            if (!item[0].value) {
+                item[0].classList.add('input-error');
+                console.log(item[1]);
+                error++;
+            } else {
+                if (item[0].classList.contains("input-error")) {
+                    item[0].classList.remove("input-error");
+                }
+            }
+        }
+
+        if (error > 0) {
+            return;
+        }
 
         let data = {
             username: usernameField.value,

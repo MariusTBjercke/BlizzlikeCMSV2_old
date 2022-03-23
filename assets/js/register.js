@@ -6,8 +6,38 @@ if (registerForm) {
     const emailField = document.querySelector(".register-form #email");
     const registerBtn = document.querySelector(".register-form #submit");
 
+    // Add listener for "enter" key.
+    registerForm.addEventListener("keydown", (e) => {
+        if (e.keyCode === 13) {
+            registerBtn.click();
+        }
+    });
+
+    let fieldsError = "All fields needs to be filled out, please try again.";
+
     registerBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+        let error = 0;
+
+        // Form validation
+        for (let item of [
+            [usernameField, "Please fill inn a username."],
+            [passwordField, "Please fill inn a password."],
+            [emailField, "Please fill in a email address."]
+        ]) {
+            if (!item[0].value) {
+                item[0].classList.add('input-error');
+                console.log(item[1]);
+                error++;
+            } else {
+                if (item[0].classList.contains("input-error")) {
+                    item[0].classList.remove("input-error");
+                }
+            }
+        }
+
+        if (error > 0) {
+            return;
+        }
 
         let data = {
             username: usernameField.value,
@@ -20,7 +50,7 @@ if (registerForm) {
                 alert("The account has been registered.");
                 window.location = "index.php";
             } else if (response === "2") {
-                alert("All fields need to be filled out, please try again.");
+                alert(fieldsError);
             } else {
                 alert("Something went wrong, please try again.");
                 usernameField.value = "";

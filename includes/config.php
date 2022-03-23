@@ -13,8 +13,12 @@ $GLOBALS['page'] = $_GET['page'] ?? 'home';
  * Initialize page data.
  */
 
-$db = new BLSqlConnection();
-$users = $db->getUsers();
+try {
+    $db = BLSqlConnection::getInstance();
+    $users = $db->getUsers();
+} catch (Exception $e) {
+    echo 'Connection error: '.$e->getMessage();
+}
 
 // Twig settings
 $GLOBALS['twig_template_dir'] = __DIR__ . '/../assets/templates';
@@ -63,6 +67,6 @@ $GLOBALS['data'] = [
                 "navigation" => true,
             ],
         ],
-        "users" => $users,
+        "users" => $users ?? [],
     ],
 ];

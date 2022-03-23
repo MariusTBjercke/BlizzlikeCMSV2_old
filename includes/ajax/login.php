@@ -12,7 +12,7 @@ if (!$username || !$password) {
     return;
 }
 
-$db = new BLSqlConnection();
+$db = BLSqlConnection::getInstance();
 
 $result = $db->validateUser($username, $password);
 

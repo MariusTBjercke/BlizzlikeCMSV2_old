@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const isProduction = process.argv[process.argv.indexOf('--mode') + 1] === 'production';
 
 // Compress output files?
-let compressFiles = false;
+let compressFiles = true;
 
 // Clean/remove all files on build?
 let cleanFiles = false;
@@ -26,6 +26,7 @@ const jsConfig = {
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
+                include: path.resolve(__dirname, 'assets/js'),
                 exclude: /node_modules/,
             },
             {
@@ -96,6 +97,7 @@ const cssConfig = {
                     },
                     "sass-loader"
                 ],
+                include: path.resolve(__dirname, 'assets'),
             },
         ]
     },

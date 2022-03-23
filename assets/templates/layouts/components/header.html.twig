@@ -1,10 +1,28 @@
+<div class="top-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% if site.current_user is not null %}
+                    <div><i class="bi bi-person-square"></i> {{ site.current_user }}</div>
+                {% else %}
+                    <div>You are not signed in.</div>
+                {% endif %}
+            </div>
+            <div class="col text-end">
+                {% if site.current_user is not null %}
+                    <a href="index.php?action=logout"><i class="bi bi-door-open"></i> Sign out?</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 <nav>
     <div class="container">
         <div class="row">
-            <div class="col-10 col-md-4 col-lg-3">
+            <div class="col-10 col-md-4">
                 <div class="top-logo"></div>
             </div>
-            <div class="col-2 col-md-8 col-lg-9">
+            <div class="col-2 col-md-8">
                 <div class="navigation">
                     {% for item in site.pages %}
                         {% if item.navigation %}
@@ -19,15 +37,3 @@
         </div>
     </div>
 </nav>
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            {% if site.current_user is not null %}
-                <p>You are signed in as: {{ site.current_user }}<br><a href="index.php?action=logout">Sign out?</a></p>
-            {% else %}
-                <p>You are not signed in.</p>
-            {% endif %}
-        </div>
-    </div>
-</div>
