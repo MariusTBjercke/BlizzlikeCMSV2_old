@@ -1,10 +1,10 @@
 const registerForm = document.querySelector(".register-form");
+const usernameField = document.querySelector(".register-form #username");
+const passwordField = document.querySelector(".register-form #password");
+const emailField = document.querySelector(".register-form #email");
+const registerBtn = document.querySelector(".register-form #submit");
 
 if (registerForm) {
-    const usernameField = document.querySelector(".register-form #username");
-    const passwordField = document.querySelector(".register-form #password");
-    const emailField = document.querySelector(".register-form #email");
-    const registerBtn = document.querySelector(".register-form #submit");
 
     // Add listener for "enter" key.
     registerForm.addEventListener("keydown", (e) => {
@@ -25,12 +25,12 @@ if (registerForm) {
             [emailField, "Please fill in a email address."]
         ]) {
             if (!item[0].value) {
-                item[0].classList.add('input-error');
+                item[0].classList.add('register-form__input-error');
                 console.log(item[1]);
                 error++;
             } else {
-                if (item[0].classList.contains("input-error")) {
-                    item[0].classList.remove("input-error");
+                if (item[0].classList.contains("register-form__input-error")) {
+                    item[0].classList.remove("register-form__input-error");
                 }
             }
         }

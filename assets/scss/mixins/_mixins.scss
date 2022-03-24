@@ -1,0 +1,36 @@
+// Import other mixins underneath
+
+@mixin form-style {
+  display: flex;
+  flex-direction: column;
+
+  &__input {
+    margin-bottom: 10px;
+
+    div {
+      display: inline-block;
+
+      &:first-child {
+        padding-right: 10px;
+        min-width: 90px;
+      }
+    }
+  }
+
+  &__input-error {
+    border-color: red;
+    border-width: 3px;
+  }
+
+  &__submit {
+    padding: .5rem 1rem;
+    background: #0063a1;
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      transform: scale(1.05);
+      transition: .25s;
+    }
+  }
+}

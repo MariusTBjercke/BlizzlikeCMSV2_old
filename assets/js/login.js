@@ -23,12 +23,12 @@ if (loginForm) {
             [passwordField, "Please fill inn a password."]
         ]) {
             if (!item[0].value) {
-                item[0].classList.add('input-error');
+                item[0].classList.add('login-form__input-error');
                 console.log(item[1]);
                 error++;
             } else {
-                if (item[0].classList.contains("input-error")) {
-                    item[0].classList.remove("input-error");
+                if (item[0].classList.contains("login-form__input-error")) {
+                    item[0].classList.remove("login-form__input-error");
                 }
             }
         }

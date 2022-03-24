@@ -1,34 +1,5 @@
+@use 'mixins/mixins';
+
 .register-form {
-  display: flex;
-  flex-direction: column;
-
-  &__input {
-    margin-bottom: 10px;
-
-    div {
-      display: inline-block;
-
-      &:first-child {
-        padding-right: 10px;
-        min-width: 90px;
-      }
-
-      .input-error {
-        border-color: red;
-        border-width: 3px;
-      }
-    }
-
-    .submit {
-      padding: .5rem 1rem;
-      background: #0063a1;
-      color: #ffffff;
-      border: none;
-
-      &:hover {
-        transform: scale(1.05);
-        transition: .25s;
-      }
-    }
-  }
+  @include mixins.form-style;
 }
