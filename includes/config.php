@@ -7,7 +7,7 @@ $GLOBALS['sql_password'] = '';
 $GLOBALS['sql_database'] = 'blizzlikecms';
 
 // Get current page
-$GLOBALS['page'] = $_GET['page'] ?? 'home';
+$page = $_GET['page'] ?? 'home';
 
 /**
  * Initialize page data.
@@ -31,12 +31,24 @@ $twig->addPath(__DIR__ . '/../assets/templates/layouts/grid', 'grid');
 
 // Twig custom functions
 $twig->addGlobalFunction('bem', [Bem::class, 'bemx']);
+$twig->addGlobalFunction('redirect', [BLTwigRedirect::class, 'redirect']);
+$twig->addGlobalFunction('redirectIfLoggedIn', [BLTwigRedirect::class, 'redirectIfLoggedIn']);
+
+if (isset($_SESSION['user'])) {
+    $user = unserialize($_SESSION['user']);
+} else {
+    $user = new BLUser();
+}
 
 // Twig data
-$GLOBALS['data'] = [
+$data = [
     "site" => [
-        "current_page" => $GLOBALS['page'],
-        "current_user" => $_SESSION['current_user'] ?? null,
+        "current_page" => $page,
+        "current_user" => [
+            "logged_in" => $user->getLoggedIn(),
+            "username" => $user->getUsername(),
+            "email" => $user->getEmail(),
+        ],
         "pages" => [
             [
                 "name" => "Home",
@@ -44,29 +56,36 @@ $GLOBALS['data'] = [
                 "url" => "home",
                 "template" => "index",
                 "navigation" => true,
+                "requires_login" => false,
             ],
             [
                 "name" => "Register",
                 "icon" => "default",
                 "url" => "register",
                 "template" => "register",
-                "navigation" => true,
+                "navigation" => !$user->getLoggedIn(),
+                "requires_login" => false,
             ],
             [
                 "name" => "Login",
                 "icon" => "default",
                 "url" => "login",
                 "template" => "login",
-                "navigation" => true,
+                "navigation" => !$user->getLoggedIn(),
+                "requires_login" => false,
             ],
             [
-                "name" => "Other",
+                "name" => "Profile",
                 "icon" => "default",
-                "url" => "other",
-                "template" => "index",
-                "navigation" => true,
+                "url" => "profile",
+                "template" => "profile",
+                "navigation" => $user->getLoggedIn(),
+                "requires_login" => true,
             ],
         ],
         "users" => $users ?? [],
+        "action" => $_GET['action'] ?? null,
     ],
 ];
+
+$twig->setData($data);

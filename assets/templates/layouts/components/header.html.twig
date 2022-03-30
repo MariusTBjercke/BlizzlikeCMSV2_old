@@ -2,15 +2,15 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                {% if site.current_user is not null %}
-                    <div><i class="bi bi-person-square"></i> {{ site.current_user }}</div>
+                {% if site.current_user.logged_in %}
+                    <a href="index.php?page=profile"><i class="bi bi-person-square"></i> {{ site.current_user.username }}</a>
                 {% else %}
                     <div>You are not signed in.</div>
                 {% endif %}
             </div>
             <div class="col text-end">
-                {% if site.current_user is not null %}
-                    <a href="index.php?action=logout"><i class="bi bi-door-open"></i> Sign out?</a>
+                {% if site.current_user.logged_in %}
+                    <a href="index.php?action=logout"><i class="bi bi-door-open"></i> Logout?</a>
                 {% endif %}
             </div>
         </div>

@@ -18,7 +18,8 @@ $result = $db->validateUser($username, $password);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $_SESSION['current_user'] = $row['username'];
+    $user = new BLUser($row['username'], $row['email'], true);
+    $_SESSION['user'] = serialize($user);
     echo "1";
 } else {
     echo "0";

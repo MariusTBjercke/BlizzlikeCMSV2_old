@@ -1,6 +1,7 @@
 // Node modules
 import 'bootstrap';
 import 'htmx.org';
+import 'unpoly';
 
 // Other assets
 import './base';

@@ -14,6 +14,8 @@ use Twig\TwigFunction;
 class BLViewRenderer extends Singleton {
     private FilesystemLoader $loader;
     private Environment $twig;
+    private bool $requiresAuth;
+    private array $data;
 
     /**
      * Page constructor.
@@ -23,6 +25,7 @@ class BLViewRenderer extends Singleton {
         parent::__construct();
         $this->loader = new FilesystemLoader($GLOBALS['twig_template_dir']);
         $this->twig = new Environment($this->loader);
+        $this->requiresAuth = false;
     }
 
     /**
@@ -48,7 +51,15 @@ class BLViewRenderer extends Singleton {
      */
     public function render(string $templateName) {
         try {
-            echo $this->twig->render($templateName . '.html.twig', $GLOBALS['data']);
+            if ($this->requiresAuth) {
+                if (!isset($_SESSION['user'])) {
+                    echo $this->twig->render('index.html.twig', $this->getData());
+                } else {
+                    echo $this->twig->render($templateName . '.html.twig', $this->getData());
+                }
+            } else {
+                echo $this->twig->render($templateName . '.html.twig', $this->getData());
+            }
         } catch (LoaderError | RuntimeError | SyntaxError $e) {
             echo "Error rendering: " . $e->getMessage();
         }
@@ -63,5 +74,31 @@ class BLViewRenderer extends Singleton {
      */
     public function addGlobalFunction(string $name, callable $function) {
         $this->twig->addFunction(new TwigFunction($name, $function));
+    }
+
+    /**
+     * Get authentication requirement status.
+     *
+     * @return bool
+     */
+    public function getAuth() {
+        return $this->requiresAuth;
+    }
+
+    /**
+     * Set authentication requirement status.
+     *
+     * @param bool $auth Authentication requirement status.
+     */
+    public function setAuth(bool $auth) {
+        $this->requiresAuth = $auth;
+    }
+
+    public function setData(array $data) {
+        $this->data = $data;
+    }
+
+    public function getData(): array {
+        return $this->data;
     }
 }

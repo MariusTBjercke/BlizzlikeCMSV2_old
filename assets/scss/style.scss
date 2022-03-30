@@ -1,8 +1,12 @@
 @use 'header';
 @use 'login';
 @use 'register';
-@use '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-utilities';
 @import '~bootstrap-icons/font/bootstrap-icons.css';
+@import '~unpoly/unpoly';
 
 body, html {
   margin: 0;

@@ -1,13 +1,11 @@
-const registerForm = document.querySelector(".register-form");
-const usernameField = document.querySelector(".register-form #username");
-const passwordField = document.querySelector(".register-form #password");
-const emailField = document.querySelector(".register-form #email");
-const registerBtn = document.querySelector(".register-form #submit");
-
-if (registerForm) {
+up.compiler('.register-form', (element) => {
+    const usernameField = document.querySelector(".register-form #username");
+    const passwordField = document.querySelector(".register-form #password");
+    const emailField = document.querySelector(".register-form #email");
+    const registerBtn = document.querySelector(".register-form #submit");
 
     // Add listener for "enter" key.
-    registerForm.addEventListener("keydown", (e) => {
+    element.addEventListener("keydown", (e) => {
         if (e.keyCode === 13) {
             registerBtn.click();
         }
@@ -22,15 +20,39 @@ if (registerForm) {
         for (let item of [
             [usernameField, "Please fill inn a username."],
             [passwordField, "Please fill inn a password."],
-            [emailField, "Please fill in a email address."]
+            [emailField, "Please fill in a email address.", [/^(.+)@(.+)$/, "Please fill in a valid email address."]]
         ]) {
             if (!item[0].value) {
                 item[0].classList.add('register-form__input-error');
-                console.log(item[1]);
+
+                if (item[0].nextElementSibling && item[0].nextElementSibling.classList.contains('login-form__error-message')) {
+                    item[0].nextElementSibling.remove();
+                }
+
+                const errorMessage = document.createElement('div');
+                errorMessage.setAttribute('class', 'login-form__error-message');
+                errorMessage.innerHTML = "*" + item[1];
+                item[0].parentNode.appendChild(errorMessage);
+
                 error++;
             } else {
                 if (item[0].classList.contains("register-form__input-error")) {
                     item[0].classList.remove("register-form__input-error");
+                }
+                if (item[0].nextElementSibling && item[0].nextElementSibling.classList.contains('login-form__error-message')) {
+                    item[0].nextElementSibling.remove();
+                }
+
+                // If regex is set, check if the email is valid.
+                if (item[2]) {
+                    if (item[0].value.match(item[2][0])) {
+                        console.log("Email is valid.");
+                    } else {
+                        const errorMessage = document.createElement('div');
+                        errorMessage.setAttribute('class', 'login-form__error-message');
+                        errorMessage.innerHTML = "*" + item[2][1];
+                        item[0].parentNode.appendChild(errorMessage);
+                    }
                 }
             }
         }
@@ -47,8 +69,7 @@ if (registerForm) {
 
         $.post('../includes/ajax/register.php', data, (response) => {
             if (response === "1") {
-                alert("The account has been registered.");
-                window.location = "index.php";
+                window.location = "index.php?action=registerSuccess";
             } else if (response === "2") {
                 alert(fieldsError);
             } else {
@@ -59,4 +80,4 @@ if (registerForm) {
             }
         });
     });
-}
+});
