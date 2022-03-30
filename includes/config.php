@@ -34,11 +34,7 @@ $twig->addGlobalFunction('bem', [Bem::class, 'bemx']);
 $twig->addGlobalFunction('redirect', [BLTwigRedirect::class, 'redirect']);
 $twig->addGlobalFunction('redirectIfLoggedIn', [BLTwigRedirect::class, 'redirectIfLoggedIn']);
 
-if (isset($_SESSION['user'])) {
-    $user = unserialize($_SESSION['user']);
-} else {
-    $user = new BLUser();
-}
+$user = (isset($_SESSION['user'])) ? unserialize($_SESSION['user']) : new BLUser();
 
 // Twig data
 $data = [

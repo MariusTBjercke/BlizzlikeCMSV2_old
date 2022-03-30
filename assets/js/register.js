@@ -11,8 +11,6 @@ up.compiler('.register-form', (element) => {
         }
     });
 
-    let fieldsError = "All fields needs to be filled out, please try again.";
-
     registerBtn.addEventListener('click', (e) => {
         let error = 0;
 
@@ -48,10 +46,12 @@ up.compiler('.register-form', (element) => {
                     if (item[0].value.match(item[2][0])) {
                         console.log("Email is valid.");
                     } else {
+                        item[0].classList.add('register-form__input-error');
                         const errorMessage = document.createElement('div');
                         errorMessage.setAttribute('class', 'login-form__error-message');
                         errorMessage.innerHTML = "*" + item[2][1];
                         item[0].parentNode.appendChild(errorMessage);
+                        error++;
                     }
                 }
             }
@@ -69,9 +69,12 @@ up.compiler('.register-form', (element) => {
 
         $.post('../includes/ajax/register.php', data, (response) => {
             if (response === "1") {
-                window.location = "index.php?action=registerSuccess";
+                window.location = "index.php?action=success";
             } else if (response === "2") {
-                alert(fieldsError);
+                alert("Something went wrong, please try again.");
+                usernameField.value = "";
+                passwordField.value = "";
+                emailField.value = "";
             } else {
                 alert("Something went wrong, please try again.");
                 usernameField.value = "";

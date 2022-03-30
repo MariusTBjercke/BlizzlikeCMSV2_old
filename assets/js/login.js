@@ -10,8 +10,6 @@ up.compiler('.login-form', (element) => {
         }
     });
 
-    let fieldsError = "All fields needs to be filled out, please try again.";
-
     loginBtn.addEventListener('click', (e) => {
         let error = 0;
 
