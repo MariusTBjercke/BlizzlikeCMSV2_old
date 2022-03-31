@@ -1,6 +1,6 @@
-@use 'header';
-@use 'login';
-@use 'register';
+@use 'register' as *;
+@use 'login' as *;
+@use 'header' as *;
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/bootstrap-grid';
 @import '~bootstrap/scss/bootstrap-reboot';

@@ -20,6 +20,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $user = new BLUser($row['username'], $row['email'], true);
     $_SESSION['user'] = serialize($user);
+    $_SESSION['action'] = "success";
     echo "1";
 } else {
     echo "0";

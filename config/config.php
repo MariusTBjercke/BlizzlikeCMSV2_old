@@ -21,16 +21,13 @@ try {
 }
 
 // Twig settings
-$GLOBALS['twig_template_dir'] = __DIR__ . '/../assets/templates';
-
 $twig = BLViewRenderer::getInstance();
 
-// Other custom template paths
+// Custom template paths
 $twig->addPath(__DIR__ . '/../assets/templates/layouts/components', 'components');
 $twig->addPath(__DIR__ . '/../assets/templates/layouts/grid', 'grid');
 
 // Twig custom functions
-$twig->addGlobalFunction('bem', [Bem::class, 'bemx']);
 $twig->addGlobalFunction('redirect', [BLTwigRedirect::class, 'redirect']);
 $twig->addGlobalFunction('redirectIfLoggedIn', [BLTwigRedirect::class, 'redirectIfLoggedIn']);
 
@@ -80,8 +77,10 @@ $data = [
             ],
         ],
         "users" => $users ?? [],
-        "action" => $_GET['action'] ?? null,
+        "action" => $_SESSION['action'] ?? null,
     ],
 ];
+
+$_SESSION['action'] = null;
 
 $twig->setData($data);

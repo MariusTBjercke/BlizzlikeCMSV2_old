@@ -1,4 +1,4 @@
-@use 'mixins/mixins';
+@use 'mixins/mixins' as mixins;
 
 .register-form {
   @include mixins.form-style;

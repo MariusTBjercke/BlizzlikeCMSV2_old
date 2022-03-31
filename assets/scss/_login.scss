@@ -1,4 +1,4 @@
-@use 'mixins/mixins';
+@use 'mixins/mixins' as mixins;
 
 .login-form {
   @include mixins.form-style;

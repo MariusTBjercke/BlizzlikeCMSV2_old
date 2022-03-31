@@ -52,7 +52,7 @@ up.compiler('.login-form', (element) => {
 
         $.post('../includes/ajax/login.php', data, (response) => {
             if (response === "1") {
-                window.location = "index.php?page=profile&action=success";
+                window.location = "index.php?page=profile";
             } else {
                 alert("Wrong username or password, please try again.");
                 usernameField.value = "";
