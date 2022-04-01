@@ -6,7 +6,7 @@ require_once('../vendor/autoload.php');
 $page = $_GET['page'] ?? 'home';
 $action = $_GET['action'] ?? '';
 
-if ($action == 'logout') {
+if ($action === 'logout') {
     session_unset();
     session_destroy();
     header("Location: " . basename(__FILE__));

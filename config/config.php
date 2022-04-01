@@ -1,10 +1,10 @@
 <?php
 
-// MySQLi settings
-$GLOBALS['sql_hostname'] = '127.0.0.1'; // USE IP AND NOT ALIAS LIKE 'localhost' HERE!
-$GLOBALS['sql_username'] = 'root';
-$GLOBALS['sql_password'] = '';
-$GLOBALS['sql_database'] = 'blizzlikecms';
+// Development only
+error_reporting(E_ALL & ~E_WARNING);
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->safeLoad();
 
 // Get current page
 $page = $_GET['page'] ?? 'home';

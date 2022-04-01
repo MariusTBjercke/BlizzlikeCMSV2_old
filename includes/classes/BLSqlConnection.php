@@ -13,10 +13,10 @@ class BLSqlConnection extends mysqli
      */
     protected function __construct() {
         parent::__construct(
-            $GLOBALS['sql_hostname'],
-            $GLOBALS['sql_username'],
-            $GLOBALS['sql_password'],
-            $GLOBALS['sql_database']
+            $_ENV['MYSQLI_HOSTNAME'],
+            $_ENV['MYSQLI_USERNAME'],
+            $_ENV['MYSQLI_PASSWORD'],
+            $_ENV['MYSQLI_DATABASE'],
         );
 
         if ($this->connect_error) {

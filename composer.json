@@ -15,6 +15,10 @@
     "twig/twig": "3.0",
     "ext-mysqli": "*",
     "doctrine/orm": "^2.11",
-    "symfony/yaml": "^5.4"
+    "symfony/yaml": "^5.4",
+    "doctrine/cache": "^2.1",
+    "symfony/cache": "^5.4",
+    "doctrine/annotations": "^1.13",
+    "vlucas/phpdotenv": "^5.4"
   }
 }
