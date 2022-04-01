@@ -1,3 +1,3 @@
 RewriteEngine On
-RewriteCond %{REQUEST_URI} !^/html [NC]
-RewriteRule ^(.*)$ /html/$1 [L]
+#RewriteCond %{REQUEST_URI} !^/html [NC]
+#RewriteRule ^(.*)$ /html/$1 [L]

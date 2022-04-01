@@ -50,7 +50,7 @@ up.compiler('.login-form', (element) => {
             password: passwordField.value
         };
 
-        $.post('../includes/ajax/login.php', data, (response) => {
+        $.post('/../includes/ajax/login.php', data, (response) => {
             if (response === "1") {
                 window.location = "profile";
             } else {
