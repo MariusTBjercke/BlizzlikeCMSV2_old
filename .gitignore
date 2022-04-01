@@ -3,4 +3,4 @@ vendor
 .idea
 .env
 # Project exclude paths
-/html/assets/js/
+/html/assets
