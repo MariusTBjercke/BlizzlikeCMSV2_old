@@ -11,7 +11,7 @@ class BLTwigRedirect {
      * @return void
      */
     public static function redirect(string $page): void {
-        header('Location: index.php?page=' . $page);
+        header('Location: ' . $page);
     }
 
     /**
@@ -21,7 +21,7 @@ class BLTwigRedirect {
      */
     public static function redirectIfLoggedIn(string $page): void {
         if (isset($_SESSION['user'])) {
-            header('Location: index.php?page=' . $page);
+            header('Location: ' . $page);
         }
     }
 }

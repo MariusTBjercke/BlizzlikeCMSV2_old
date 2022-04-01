@@ -23,7 +23,7 @@ class BLViewRenderer extends Singleton {
      */
     protected function __construct() {
         parent::__construct();
-        $this->loader = new FilesystemLoader(__DIR__ . '/../../assets/templates');
+        $this->loader = new FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . $_ENV['TWIG_TEMPLATES_PATH']);
         $this->twig = new Environment($this->loader);
         $this->requiresAuth = false;
     }
