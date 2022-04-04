@@ -4,14 +4,14 @@ import 'htmx.org';
 import 'unpoly';
 
 // Other assets
-import './base';
-import './login';
-import './register';
+import './lib/navigation';
+import './lib/login';
+import './lib/register';
 
 // @ts-ignore
 window.htmx = require('htmx.org');
 
 // Images
 // @ts-ignore
-import Favicon from '../img/favicon.png';
+import Favicon from '../img/icons/favicon.png';
 new Image(Favicon);

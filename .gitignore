@@ -2,5 +2,5 @@ node_modules
 vendor
 .idea
 .env
-# Project exclude paths
+
 /html/assets
