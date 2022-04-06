@@ -6,6 +6,9 @@ error_reporting(E_ALL & ~E_WARNING);
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->safeLoad();
 
+// Define the root path
+const ROOT_PATH = __DIR__ . '/../';
+
 // Get current page
 $page = $_GET['page'] ?? 'home';
 

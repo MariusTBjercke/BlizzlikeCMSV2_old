@@ -7,7 +7,12 @@ up.compiler('nav', (element) => {
         window.location.href = href.substring(0, href.lastIndexOf('/'));
     });
 
-    function removeHoverEffect(items, activeItem) {
+    /**
+     * Removes active styling when hovering over menu items.
+     * @param items Array of menu items to remove active styling from.
+     * @param activeItem The currently active menu item.
+     */
+    function removeActiveEffect(items, activeItem) {
         let oldBackgroundColor = activeItem.style.backgroundColor;
         let oldColor = activeItem.style.color;
         items.forEach((item) => {
@@ -35,11 +40,11 @@ up.compiler('nav', (element) => {
 
     const navItems = element.querySelectorAll(".navigation__item");
     const activeItem = element.querySelector(".navigation__item_active");
-    removeHoverEffect(navItems, activeItem);
+    removeActiveEffect(navItems, activeItem);
 
     let mobileNavItems = element.querySelectorAll(".collapsed-navigation__item");
     const mobileActiveItem = element.querySelector(".collapsed-navigation__item_active");
-    removeHoverEffect(mobileNavItems, mobileActiveItem);
+    removeActiveEffect(mobileNavItems, mobileActiveItem);
 
     // Mobile navigation dropdown
     const burgerBtn = element.querySelector(".navigation-wrapper__bars");
@@ -53,6 +58,9 @@ up.compiler('nav', (element) => {
         navigation.classList.toggle("collapsed-navigation_open");
     }
 
+    /**
+     * Open/close navigation menu.
+     */
     function toggleNavigation() {
         navigation.classList.toggle("collapsed-navigation_open");
         sessionStorage.setItem('navigation', navigation.classList.contains("collapsed-navigation_open").toString());

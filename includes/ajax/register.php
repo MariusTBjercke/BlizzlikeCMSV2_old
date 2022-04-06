@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once('../../vendor/autoload.php');
+require_once(__DIR__ . '/../../vendor/autoload.php');
 
 $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
 $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);

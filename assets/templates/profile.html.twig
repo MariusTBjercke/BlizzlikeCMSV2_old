@@ -6,25 +6,31 @@
 
 {% block maincontent %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>Profile</h1>
-            </div>
-            {% if site.action == 'success' %}
-                <div class="col text-end">
-                    <div class="text-success">Login success!</div>
+    <div class="profile">
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>Profile</h1>
                 </div>
-            {% endif %}
+                {% if site.action == 'success' %}
+                    <div class="col profile__login-success">
+                        <div class="profile__alert-wrapper">
+                            <div class="alert alert-success" role="alert">Login success!</div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h5>{{ site.current_user.username }}</h5>
+                    <p>{{ site.current_user.email }}</p>
+                    <a href="index.php?action=logout">Logout</a>
+                </div>
+            </div>
         </div>
 
-        <div class="row">
-            <div class="col">
-                <h5>{{ site.current_user.username }}</h5>
-                <p>{{ site.current_user.email }}</p>
-                <a href="index.php?action=logout">Logout</a>
-            </div>
-        </div>
     </div>
 
 {% endblock %}

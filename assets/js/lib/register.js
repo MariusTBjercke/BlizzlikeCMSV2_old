@@ -62,12 +62,13 @@ up.compiler('.register-form', (element) => {
         }
 
         let data = {
+            action: 'register',
             username: usernameField.value,
             password: passwordField.value,
             email: emailField.value
         };
 
-        $.post('../includes/ajax/register.php', data, (response) => {
+        $.post('/xmlhttprequest.php', data, (response) => {
             if (response === "1") {
                 window.location = "index.php?action=success";
             } else if (response === "2") {

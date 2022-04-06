@@ -46,11 +46,12 @@ up.compiler('.login-form', (element) => {
         }
 
         let data = {
+            action: 'login',
             username: usernameField.value,
             password: passwordField.value
         };
 
-        $.post('/../includes/ajax/login.php', data, (response) => {
+        $.post('/xmlhttprequest.php', data, (response) => {
             if (response === "1") {
                 window.location = "profile";
             } else {
